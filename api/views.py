@@ -1,11 +1,6 @@
 from rest_framework import viewsets, permissions, serializers
 from rapihogar.models import Company
-
-
-class CompanySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Company
-        fields = '__all__'
+from api.serializers import CompanySerializer
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
