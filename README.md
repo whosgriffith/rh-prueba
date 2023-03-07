@@ -1,5 +1,45 @@
 # README #
 
+## Management Commands
+Use `python manage.py generate-pedidos <int>` to generate X amount of random `Pedido`'s 
+
+Use `python manage.py generate-repairman <int>` to generate X amount of random `Repairman`'s
+
+## Endpoint's expected responses
+### ```GET api/repairman/```
+```json
+[
+    {
+        "full_name": "Manuel Gutierrez",
+        "hours_worked": 6,
+        "total_pay": 1020.0,
+        "orders": 1
+    },
+    {
+        "full_name": "Simon Correa",
+        "hours_worked": 3,
+        "total_pay": 510.0,
+        "orders": 1
+    }
+]
+```
+
+### ```GET api/repairman/summary/```
+```json
+{
+    "average_pay": 765.0,
+    "below_average": [
+        {
+            "full_name": "Simon Correa",
+            "hours_worked": 3,
+            "total_pay": 510.0,
+            "orders": 1
+        }
+    ],
+    "min_pay": "Simon Correa",
+    "max_pay": "Manuel Gutierrez"
+}
+```
 
 ## Instalar Docker
 
