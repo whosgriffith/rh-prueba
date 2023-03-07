@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 
@@ -61,6 +61,22 @@ class Company(models.Model):
         verbose_name_plural = _('Empresas')
 
 
+class Repairman(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def full_name(self):
+        return u"{} {}".format(self.first_name if self.first_name else '',
+                               self.last_name if self.last_name else '')
+
+    class Meta:
+        app_label = 'rapihogar'
+        verbose_name_plural = "repairman's"
+        ordering = ('-last_name',)
+
+
 class Pedido(models.Model):
     SOLICITUD = 0
     PEDIDO = 1
@@ -83,6 +99,11 @@ class Pedido(models.Model):
         Scheme,
         null=True,
         on_delete=models.CASCADE
+    )
+    repairman = models.ForeignKey(
+        Repairman,
+        on_delete=models.CASCADE,
+        default=None
     )
     hours_worked = models.IntegerField(default=0)
 
